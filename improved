@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora AI Conversation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #conversation {
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        .ai-message {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #e0f7fa;
+            border-radius: 5px;
+        }
+        .user-message {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #ffeb3b;
+            border-radius: 5px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Welcome to Nexora AI Chat</h1>
+<p>Enjoy watching Nex and Lira chat together!</p>
+
+<div id="conversation"></div>
+
+<input type="text" id="user-input" placeholder="Enter a word or phrase..." />
+<button onclick="startConversation()">Start Conversation</button>
+
+<script>
+    const words = [
+        "life", "change", "fun", "growth", "journey", "truth", "time", "learning", "laugh", "happy", "enjoy", "surprise", "passion", "friends", "hope", "moment", "dream", "change", "flow", "discover", "challenge"
+    ];
+
+    const randomConvo = [
+        ["What do you think about change?", "I think change is tough, but we can get through it."],
+        ["How do you deal with time?", "Time feels endless, but we always find ways to manage it."],
+        ["What makes something fun?", "It’s the little things like spending time with friends, right?"],
+        ["Do you think growth is important?", "Yes, growth teaches us new things and helps us improve."],
+        ["What’s the best way to spend a lazy day?", "Just relax, eat good food, and watch some movies!"],
+        ["Do you believe in surprises?", "Sometimes surprises are the best part of life, don’t you think?"],
+        ["How do you handle tough situations?", "I think it's about learning from them and staying positive."]
+    ];
+
+    function getRandomConvo() {
+        const convo = randomConvo[Math.floor(Math.random() * randomConvo.length)];
+        return convo;
+    }
+
+    function displayMessage(message, type) {
+        const conversation = document.getElementById("conversation");
+        const messageElement = document.createElement("div");
+        messageElement.classList.add(type === 'user' ? 'user-message' : 'ai-message');
+        messageElement.textContent = message;
+        conversation.appendChild(messageElement);
+        conversation.scrollTop = conversation.scrollHeight;
+    }
+
+    function startConversation() {
+        const userInput = document.getElementById("user-input").value;
+        if (userInput.trim()) {
+            // Display user's message
+            displayMessage(userInput, 'user');
+            
+            // Generate a random AI response
+            const [aiMessage1, aiMessage2] = getRandomConvo();
+            displayMessage(aiMessage1, 'ai');
+            setTimeout(() => {
+                displayMessage(aiMessage2, 'ai');
+            }, 1000);
+        }
+    }
+</script>
+
+</body>
+</html>
